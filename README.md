@@ -1,1 +1,2 @@
 # LPZero
+Personal blog
