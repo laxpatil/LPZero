@@ -3,1028 +3,129 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Laxmikant Patil | Data Engineer</title>
+    <title>laxmikant@lpatil:~</title>
+    <meta name="description" content="Software engineer at Apple, on the data side. Notes on distributed systems and travel.">
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
 
-        :root {
-            --bg-dark: #0a0a1a;
-            --bg-surface: #12122a;
-            --primary: #ff2d95;
-            --secondary: #b14eff;
-            --tertiary: #00d4ff;
-            --text-muted: #6a6a8a;
-            --text-light: #e0e0f0;
-            --border: #1e1e3a;
-            --transition: 0.2s ease;
-        }
-
-        html {
-            scroll-behavior: smooth;
-        }
-
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: var(--bg-dark);
-            color: var(--text-light);
-            overflow-x: hidden;
-        }
-
-        /* Synthwave horizon glow effect */
-        body::before {
-            content: '';
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 300px;
-            background: linear-gradient(
-                180deg,
-                transparent 0%,
-                rgba(255, 45, 149, 0.08) 25%,
-                rgba(177, 78, 255, 0.06) 50%,
-                rgba(0, 212, 255, 0.04) 75%,
-                transparent 100%
-            );
-            pointer-events: none;
-            z-index: 0;
-        }
-
-        ::selection {
-            background: var(--primary);
-            color: #fff;
-        }
-
-        /* Scrollbar */
-        ::-webkit-scrollbar {
-            width: 6px;
-        }
-
-        ::-webkit-scrollbar-track {
-            background: var(--bg-dark);
-        }
-
-        ::-webkit-scrollbar-thumb {
-            background: #2a2a4a;
-            border-radius: 3px;
-        }
-
-        ::-webkit-scrollbar-thumb:hover {
-            background: #3a3a5a;
-        }
-
-        /* ============ STICKY NAV ============ */
-        nav {
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            background: rgba(10, 10, 26, 0.9);
-            backdrop-filter: blur(10px);
-            border-bottom: 1px solid var(--border);
-            padding: 1.2rem 2rem;
-        }
-
-        .nav-container {
-            max-width: 1000px;
-            margin: 0 auto;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .logo {
-            font-family: 'JetBrains Mono', monospace;
-            font-weight: 700;
-            font-size: 1.2rem;
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            cursor: pointer;
-            transition: opacity var(--transition);
-        }
-
-        .logo:hover {
-            opacity: 0.8;
-        }
-
-        nav ul {
-            list-style: none;
-            display: flex;
-            gap: 2.5rem;
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 0.85rem;
-        }
-
-        nav a {
-            color: var(--text-muted);
-            text-decoration: none;
-            transition: color var(--transition);
-        }
-
-        nav a:hover {
-            color: var(--primary);
-        }
-
-        /* ============ MAIN CONTAINER ============ */
-        main {
-            max-width: 1000px;
-            margin: 0 auto;
-            padding: 0 2rem;
-            position: relative;
-            z-index: 1;
-        }
-
-        /* ============ HERO ============ */
-        .hero {
-            padding: 5rem 0 3rem;
-        }
-
-        .hero-label {
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 0.85rem;
-            color: var(--text-muted);
-            margin-bottom: 1.5rem;
-            display: flex;
-            align-items: center;
-            gap: 0.8rem;
-        }
-
-        .label-line {
-            width: 30px;
-            height: 2px;
-            background: linear-gradient(90deg, var(--primary), var(--secondary));
-            border-radius: 1px;
-        }
-
-        .hero h1 {
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 2.4rem;
-            font-weight: 700;
-            line-height: 1.3;
-            margin-bottom: 1.5rem;
-        }
-
-        .hl {
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .hero p {
-            font-size: 1.05rem;
-            color: var(--text-muted);
-            margin-bottom: 2rem;
-            line-height: 1.6;
-            max-width: 600px;
-        }
-
-        .hero-links {
-            display: flex;
-            gap: 2rem;
-            margin-top: 2rem;
-            flex-wrap: wrap;
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 0.9rem;
-        }
-
-        .hero-links a {
-            color: var(--text-muted);
-            text-decoration: none;
-            transition: color var(--transition);
-            display: flex;
-            align-items: center;
-            gap: 0.4rem;
-        }
-
-        .hero-links a:hover {
-            color: var(--primary);
-        }
-
-        .hero-links span {
-            font-size: 0.7rem;
-            opacity: 0.6;
-        }
-
-        /* ============ STATS BAR ============ */
-        .stats {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 0.8rem;
-            margin: 4rem 0;
-        }
-
-        .stat-card {
-            background: var(--bg-surface);
-            border: 1px solid var(--border);
-            border-radius: 8px;
-            padding: 1.5rem;
-            transition: box-shadow var(--transition);
-            text-align: center;
-        }
-
-        .stat-card:hover {
-            box-shadow: 0 0 20px rgba(255, 45, 149, 0.15);
-            border-color: var(--primary);
-        }
-
-        .stat-number {
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 2rem;
-            font-weight: 700;
-            margin-bottom: 0.5rem;
-        }
-
-        .stat-label {
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 0.85rem;
-            color: var(--text-muted);
-        }
-
-        /* ============ SECTIONS ============ */
-        section {
-            margin: 4rem 0;
-        }
-
-        .section-header {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            margin-bottom: 2rem;
-            font-family: 'JetBrains Mono', monospace;
-        }
-
-        .section-number {
-            color: var(--primary);
-            font-weight: 700;
-            font-size: 1.2rem;
-        }
-
-        .section-title {
-            font-size: 1.3rem;
-            font-weight: 600;
-            text-transform: lowercase;
-        }
-
-        /* ============ POSTS SECTION ============ */
-        .posts-list {
-            border-top: 1px solid var(--border);
-        }
-
-        .post-item {
-            display: grid;
-            grid-template-columns: 120px 1fr auto;
-            gap: 2rem;
-            padding: 1.5rem 0;
-            border-bottom: 1px solid var(--border);
-            align-items: center;
-            transition: background var(--transition);
-        }
-
-        .post-item:hover {
-            background: rgba(255, 45, 149, 0.02);
-            padding-left: 1rem;
-            margin-left: -1rem;
-            padding-right: 1rem;
-            margin-right: -1rem;
-        }
-
-        .post-date {
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 0.85rem;
-            color: var(--text-muted);
-        }
-
-        .post-title {
-            font-size: 1.05rem;
-            font-weight: 500;
-            cursor: pointer;
-            transition: color var(--transition);
-        }
-
-        .post-title:hover {
-            color: var(--primary);
-        }
-
-        .post-tag {
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 0.75rem;
-            padding: 0.4rem 0.8rem;
-            border-radius: 4px;
-            border: 1px solid;
-            text-transform: lowercase;
-            white-space: nowrap;
-        }
-
-        .tag-tech {
-            color: var(--primary);
-            border-color: var(--primary);
-            background: rgba(255, 45, 149, 0.08);
-        }
-
-        .tag-travel {
-            color: var(--tertiary);
-            border-color: var(--tertiary);
-            background: rgba(0, 212, 255, 0.08);
-        }
-
-        .tag-thoughts {
-            color: var(--secondary);
-            border-color: var(--secondary);
-            background: rgba(177, 78, 255, 0.08);
-        }
-
-        /* ============ PROJECTS SECTION ============ */
-        .projects-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 1.5rem;
-        }
-
-        .project-card {
-            background: var(--bg-surface);
-            border: 1px solid var(--border);
-            border-radius: 8px;
-            padding: 1.5rem;
-            transition: all var(--transition);
-        }
-
-        .project-card:hover {
-            border-color: var(--primary);
-            box-shadow: 0 0 20px rgba(255, 45, 149, 0.15);
-            transform: translateY(-2px);
-        }
-
-        .project-icon {
-            font-size: 1.8rem;
-            margin-bottom: 0.8rem;
-        }
-
-        .project-title {
-            font-family: 'JetBrains Mono', monospace;
-            font-weight: 600;
-            font-size: 1.1rem;
-            margin-bottom: 0.8rem;
-            color: var(--text-light);
-        }
-
-        .project-desc {
-            font-size: 0.95rem;
-            color: var(--text-muted);
-            line-height: 1.5;
-            margin-bottom: 1rem;
-        }
-
-        .project-stats {
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 0.85rem;
-            color: var(--primary);
-            margin-bottom: 1rem;
-        }
-
-        .project-tags {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.5rem;
-        }
-
-        .tech-tag {
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 0.75rem;
-            padding: 0.4rem 0.7rem;
-            border: 1px solid var(--border);
-            border-radius: 4px;
-            color: var(--text-muted);
-            transition: all var(--transition);
-        }
-
-        .tech-tag:hover {
-            border-color: var(--primary);
-            color: var(--primary);
-        }
-
-        /* ============ GALLERY SECTION ============ */
-        .gallery-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 3px;
-            border-radius: 12px;
-            overflow: hidden;
-            background: var(--bg-surface);
-            padding: 3px;
-        }
-
-        .gallery-cell {
-            aspect-ratio: 1;
-            border-radius: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 3rem;
-            position: relative;
-            cursor: pointer;
-            overflow: hidden;
-            transition: all var(--transition);
-        }
-
-        .gallery-cell-1 {
-            background: linear-gradient(135deg, rgba(177, 78, 255, 0.2), rgba(0, 212, 255, 0.1));
-        }
-
-        .gallery-cell-2 {
-            background: linear-gradient(135deg, rgba(255, 45, 149, 0.2), rgba(177, 78, 255, 0.1));
-        }
-
-        .gallery-cell-3 {
-            background: linear-gradient(135deg, rgba(0, 212, 255, 0.2), rgba(255, 45, 149, 0.1));
-        }
-
-        .gallery-cell-4 {
-            background: linear-gradient(135deg, rgba(177, 78, 255, 0.15), rgba(255, 45, 149, 0.15));
-        }
-
-        .gallery-cell-5 {
-            background: linear-gradient(135deg, rgba(255, 45, 149, 0.15), rgba(0, 212, 255, 0.15));
-        }
-
-        .gallery-cell-6 {
-            background: linear-gradient(135deg, rgba(0, 212, 255, 0.15), rgba(177, 78, 255, 0.15));
-        }
-
-        .gallery-cell-7 {
-            background: linear-gradient(135deg, rgba(177, 78, 255, 0.2), rgba(0, 212, 255, 0.2));
-        }
-
-        .gallery-cell-8 {
-            background: linear-gradient(135deg, rgba(255, 45, 149, 0.2), rgba(177, 78, 255, 0.2));
-        }
-
-        .gallery-overlay {
-            position: absolute;
-            inset: 0;
-            background: rgba(10, 10, 26, 0.7);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            opacity: 0;
-            transition: opacity var(--transition);
-            gap: 0.5rem;
-        }
-
-        .gallery-cell:hover .gallery-overlay {
-            opacity: 1;
-        }
-
-        .gallery-location {
-            color: var(--primary);
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 0.85rem;
-            font-weight: 600;
-        }
-
-        .gallery-date {
-            color: var(--text-muted);
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 0.75rem;
-        }
-
-        /* ============ FOOTER ============ */
-        footer {
-            border-top: 1px solid;
-            border-image: linear-gradient(90deg, var(--primary), var(--secondary), transparent) 1;
-            padding: 3rem 0;
-            margin-top: 4rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 2rem;
-        }
-
-        footer p {
-            font-size: 0.9rem;
-            color: var(--text-muted);
-            font-family: 'JetBrains Mono', monospace;
-        }
-
-        footer a {
-            color: var(--primary);
-            text-decoration: none;
-            transition: color var(--transition);
-        }
-
-        footer a:hover {
-            color: var(--tertiary);
-        }
-
-        /* ============ POST PAGES ============ */
-        .page {
-            display: none;
-            padding: 3rem 0;
-        }
-
-        .page.active {
-            display: block;
-        }
-
-        .back-link {
-            font-family: 'JetBrains Mono', monospace;
-            color: var(--primary);
-            text-decoration: none;
-            font-size: 0.9rem;
-            margin-bottom: 2rem;
-            transition: color var(--transition);
-            cursor: pointer;
-        }
-
-        .back-link:hover {
-            color: var(--tertiary);
-        }
-
-        .post-content {
-            max-width: 680px;
-        }
-
-        .post-content h1 {
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 2rem;
-            margin-bottom: 1rem;
-            font-weight: 700;
-        }
-
-        .post-content h2 {
-            font-size: 1.4rem;
-            margin: 2rem 0 1rem;
-            font-weight: 600;
-        }
-
-        .post-content p {
-            line-height: 1.7;
-            margin-bottom: 1.2rem;
-            color: var(--text-light);
-        }
-
-        .post-content blockquote {
-            border-left: 3px solid var(--primary);
-            padding-left: 1.5rem;
-            margin: 2rem 0;
-            color: var(--text-muted);
-            font-style: italic;
-        }
-
-        .post-content img {
-            max-width: 100%;
-            height: auto;
-            border-radius: 8px;
-            margin: 2rem 0;
-            display: block;
-        }
-
-        .code-block {
-            background: var(--bg-surface);
-            border: 1px solid var(--border);
-            border-radius: 8px;
-            padding: 1.5rem;
-            overflow-x: auto;
-            margin: 1.5rem 0;
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 0.9rem;
-            line-height: 1.5;
-        }
-
-        .kw { color: var(--primary); }
-        .str { color: var(--tertiary); }
-        .comment { color: var(--text-muted); }
-        .func { color: var(--secondary); }
-        .type { color: var(--primary); }
-
-        /* ============ RESPONSIVE ============ */
-        @media (max-width: 768px) {
-            nav ul {
-                gap: 1.5rem;
-            }
-
-            .hero h1 {
-                font-size: 1.8rem;
-            }
-
-            .post-item {
-                grid-template-columns: 1fr;
-                gap: 0.5rem;
-            }
-
-            .post-date {
-                order: -1;
-            }
-
-            .projects-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .gallery-grid {
-                grid-template-columns: repeat(3, 1fr);
-            }
-
-            footer {
-                justify-content: center;
-                text-align: center;
-            }
-
-            .stats {
-                grid-template-columns: repeat(2, 1fr);
-            }
-        }
-
-        @media (max-width: 480px) {
-            main {
-                padding: 0 1rem;
-            }
-
-            nav {
-                padding: 1rem;
-            }
-
-            nav ul {
-                display: none;
-            }
-
-            .hero h1 {
-                font-size: 1.5rem;
-            }
-
-            .gallery-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-
-            .stats {
-                grid-template-columns: 1fr;
-            }
-
-            section {
-                margin: 2rem 0;
-            }
-        }
-    </style>
+    <link rel="stylesheet" href="assets/style.css">
 </head>
 <body>
-    <!-- Navigation -->
-    <nav>
-        <div class="nav-container">
-            <div class="logo" onclick="go('home')">lpatil</div>
-            <ul>
-                <li><a href="#" onclick="go('home'); return false">/home</a></li>
-                <li><a href="#" onclick="go('home'); return false">/blog</a></li>
-                <li><a href="#" onclick="go('home'); return false">/projects</a></li>
-                <li><a href="#" onclick="go('home'); return false">/gallery</a></li>
-            </ul>
+
+    <header class="topbar">
+        <span class="title"><a href="index.html">~/lpatil</a></span>
+        <nav class="topbar-nav" aria-label="Sections">
+            <a href="about/">about</a>
+            <a href="travel/">travel</a>
+            <a href="photography/">photography</a>
+            <a href="writing/">writing</a>
+        </nav>
+    </header>
+
+    <main class="term">
+        <div class="stagger">
+
+            <div class="line">
+                <span class="prompt">$</span>
+                <span class="cmd">whoami</span>
+            </div>
+            <p class="out name">Laxmikant Patil</p>
+
+            <div class="line">
+                <span class="prompt">$</span>
+                <span class="cmd">view <span class="str">~/me.jpg</span></span>
+            </div>
+            <div class="out photo-frame">
+                <img src="pictures/me.jpg" alt="Portrait of Laxmikant Patil" class="photo" width="170" height="170">
+            </div>
+
+            <div class="line">
+                <span class="prompt">$</span>
+                <span class="cmd">cat <span class="str">about.txt</span></span>
+            </div>
+            <p class="out">
+                Software engineer at <em>Apple</em> in <em>Seattle</em>, working on the data
+                side of App Store analytics &mdash; big data, distributed systems and the
+                quiet plumbing that keeps large products honest at scale. Previously at
+                PayPal. Off the clock, I travel, hike, and click.
+            </p>
+
+            <div class="line">
+                <span class="prompt">$</span>
+                <span class="cmd">ls ~/elsewhere/</span>
+            </div>
+            <div class="out">
+                <div class="links">
+                    <span class="row">
+                        <svg class="icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.39 7.86 10.91.57.11.78-.25.78-.55v-2.05c-3.2.7-3.87-1.54-3.87-1.54-.52-1.32-1.27-1.67-1.27-1.67-1.04-.71.08-.7.08-.7 1.15.08 1.76 1.18 1.76 1.18 1.02 1.75 2.68 1.25 3.34.96.1-.74.4-1.25.73-1.54-2.56-.29-5.25-1.28-5.25-5.7 0-1.26.45-2.29 1.19-3.1-.12-.29-.52-1.47.11-3.06 0 0 .97-.31 3.18 1.19.92-.26 1.91-.39 2.89-.39.98 0 1.97.13 2.89.39 2.21-1.5 3.18-1.19 3.18-1.19.63 1.59.23 2.77.11 3.06.74.81 1.19 1.84 1.19 3.1 0 4.43-2.69 5.41-5.26 5.69.41.36.78 1.07.78 2.15v3.19c0 .31.21.67.79.55C20.21 21.39 23.5 17.08 23.5 12 23.5 5.65 18.35.5 12 .5z"/></svg>
+                        <a href="https://github.com/laxpatil">github.com/laxpatil</a>
+                    </span>
+                    <span class="row">
+                        <svg class="icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24h-6.66l-5.214-6.817-5.965 6.817H1.68l7.73-8.833L1.254 2.25H8.08l4.712 6.232 5.452-6.232zm-1.161 17.52h1.833L7.084 4.126H5.117L17.083 19.77z"/></svg>
+                        <a href="https://x.com/laxpatil">x.com/laxpatil</a>
+                    </span>
+                    <span class="row">
+                        <svg class="icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.45 20.45h-3.55v-5.57c0-1.33-.03-3.04-1.85-3.04-1.86 0-2.14 1.45-2.14 2.95v5.66H9.35V9h3.41v1.56h.04c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.28 2.37 4.28 5.46v6.28zM5.34 7.43c-1.14 0-2.07-.92-2.07-2.07 0-1.14.93-2.07 2.07-2.07s2.07.93 2.07 2.07-.93 2.07-2.07 2.07zm1.78 13.02H3.56V9h3.56v11.45zM22.23 0H1.77C.79 0 0 .77 0 1.72v20.56C0 23.23.79 24 1.77 24h20.46c.98 0 1.77-.77 1.77-1.72V1.72C24 .77 23.21 0 22.23 0z"/></svg>
+                        <a href="https://www.linkedin.com/in/laxmikant-patil27/">linkedin.com/in/laxmikant-patil27</a>
+                    </span>
+                    <span class="row">
+                        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>
+                        <a href="mailto:hello@lpatil.dev">hello@lpatil.dev</a>
+                    </span>
+                </div>
+            </div>
+
+            <div class="line">
+                <span class="prompt">$</span>
+                <span class="cmd">tail <span class="flag">-f</span> <span class="str">~/blog.log</span></span>
+            </div>
+            <div class="out ticker-wrap" aria-label="Latest posts">
+                <div class="ticker">
+                    <div class="ticker-track">
+                        <span class="post"><span class="tag travel">travel</span><span class="date">2026-03-14</span>Chicago Diaries — skydeck at day and night</span>
+                        <span class="sep">//</span>
+                        <span class="post"><span class="tag tech">tech</span><span class="date">2026-02-28</span>Notes on building boring data pipelines</span>
+                        <span class="sep">//</span>
+                        <span class="post"><span class="tag thoughts">thoughts</span><span class="date">2025-12-20</span>On keeping a small corner of the web</span>
+                        <span class="sep">//</span>
+                        <span class="post"><span class="tag travel">travel</span><span class="date">2025-11-08</span>Goa in December, not what I expected</span>
+                        <span class="sep">//</span>
+                        <span class="post"><span class="tag tech">tech</span><span class="date">2025-10-02</span>Data modeling patterns for analytics at scale</span>
+                        <span class="sep">//</span>
+                        <span class="post"><span class="tag thoughts">thoughts</span><span class="date">2025-09-15</span>Why I stopped chasing productivity hacks</span>
+                        <span class="sep">//</span>
+
+                        <!-- duplicate for seamless loop -->
+                        <span class="post" aria-hidden="true"><span class="tag travel">travel</span><span class="date">2026-03-14</span>Chicago Diaries — skydeck at day and night</span>
+                        <span class="sep" aria-hidden="true">//</span>
+                        <span class="post" aria-hidden="true"><span class="tag tech">tech</span><span class="date">2026-02-28</span>Notes on building boring data pipelines</span>
+                        <span class="sep" aria-hidden="true">//</span>
+                        <span class="post" aria-hidden="true"><span class="tag thoughts">thoughts</span><span class="date">2025-12-20</span>On keeping a small corner of the web</span>
+                        <span class="sep" aria-hidden="true">//</span>
+                        <span class="post" aria-hidden="true"><span class="tag travel">travel</span><span class="date">2025-11-08</span>Goa in December, not what I expected</span>
+                        <span class="sep" aria-hidden="true">//</span>
+                        <span class="post" aria-hidden="true"><span class="tag tech">tech</span><span class="date">2025-10-02</span>Data modeling patterns for analytics at scale</span>
+                        <span class="sep" aria-hidden="true">//</span>
+                        <span class="post" aria-hidden="true"><span class="tag thoughts">thoughts</span><span class="date">2025-09-15</span>Why I stopped chasing productivity hacks</span>
+                        <span class="sep" aria-hidden="true">//</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="line">
+                <span class="prompt">$</span>
+                <span class="cursor" aria-hidden="true"></span>
+            </div>
+
         </div>
-    </nav>
+    </main>
 
-    <!-- Home Page -->
-    <div id="page-home" class="page active">
-        <main>
-            <!-- Hero -->
-            <section class="hero">
-                <div class="hero-label">
-                    <div class="label-line"></div>
-                    data engineer × explorer
-                </div>
-                <h1>I build data pipelines,<br>break things, and write<br>about <span class="hl">both</span>.</h1>
-                <p>Software data engineer. Distributed systems, real-time streaming, and making sense of the world through data and travel.</p>
-                <div class="hero-links">
-                    <a href="#">github <span>↗</span></a>
-                    <a href="#">twitter <span>↗</span></a>
-                    <a href="#">linkedin <span>↗</span></a>
-                    <a href="#">resume.pdf <span>↗</span></a>
-                </div>
-            </section>
+    <footer class="bottombar">
+        <span>© 2026</span>
+        <span>lpatil.dev</span>
+    </footer>
 
-            <!-- Stats -->
-            <section class="stats">
-                <div class="stat-card">
-                    <div class="stat-number">42</div>
-                    <div class="stat-label">posts</div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-number">12</div>
-                    <div class="stat-label">pipelines</div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-number">8</div>
-                    <div class="stat-label">countries</div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-number">5PB+</div>
-                    <div class="stat-label">processed</div>
-                </div>
-            </section>
-
-            <!-- Recent Posts -->
-            <section>
-                <div class="section-header">
-                    <span class="section-number">01</span>
-                    <span class="section-title">recent posts</span>
-                </div>
-                <div class="posts-list">
-                    <div class="post-item">
-                        <div class="post-date">2025-01-12</div>
-                        <div class="post-title" onclick="go('travel-post')">3 Days in Manali — Snow, Chai & Solang Valley</div>
-                        <div class="post-tag tag-travel">travel</div>
-                    </div>
-                    <div class="post-item">
-                        <div class="post-date">2025-01-08</div>
-                        <div class="post-title" onclick="go('tech-post')">Building Real-Time Pipelines with Kafka + Flink</div>
-                        <div class="post-tag tag-tech">tech</div>
-                    </div>
-                    <div class="post-item">
-                        <div class="post-date">2025-01-03</div>
-                        <div class="post-title" onclick="go('home')">Why I Stopped Chasing Productivity Hacks</div>
-                        <div class="post-tag tag-thoughts">thoughts</div>
-                    </div>
-                    <div class="post-item">
-                        <div class="post-date">2024-12-28</div>
-                        <div class="post-title" onclick="go('home')">Goa in December — Not What I Expected</div>
-                        <div class="post-tag tag-travel">travel</div>
-                    </div>
-                    <div class="post-item">
-                        <div class="post-date">2024-12-20</div>
-                        <div class="post-title" onclick="go('home')">Data Modeling Patterns for Analytics at Scale</div>
-                        <div class="post-tag tag-tech">tech</div>
-                    </div>
-                    <div class="post-item">
-                        <div class="post-date">2024-12-15</div>
-                        <div class="post-title" onclick="go('home')">On Being Comfortable With Not Knowing</div>
-                        <div class="post-tag tag-thoughts">thoughts</div>
-                    </div>
-                </div>
-            </section>
-
-            <!-- Projects -->
-            <section>
-                <div class="section-header">
-                    <span class="section-number">02</span>
-                    <span class="section-title">projects</span>
-                </div>
-                <div class="projects-grid">
-                    <div class="project-card">
-                        <div class="project-icon">⚡</div>
-                        <div class="project-title">stream-engine</div>
-                        <div class="project-desc">Real-time event processing system. Handles 100K events/sec with sub-second latency.</div>
-                        <div class="project-stats">100K events/sec</div>
-                        <div class="project-tags">
-                            <span class="tech-tag">kafka</span>
-                            <span class="tech-tag">flink</span>
-                            <span class="tech-tag">clickhouse</span>
-                            <span class="tech-tag">docker</span>
-                        </div>
-                    </div>
-                    <div class="project-card">
-                        <div class="project-icon">🔍</div>
-                        <div class="project-title">data-quality-fw</div>
-                        <div class="project-desc">Automated data quality checks & monitoring across 200+ tables with alerting.</div>
-                        <div class="project-stats">200+ tables</div>
-                        <div class="project-tags">
-                            <span class="tech-tag">great-expectations</span>
-                            <span class="tech-tag">dbt</span>
-                            <span class="tech-tag">python</span>
-                            <span class="tech-tag">airflow</span>
-                        </div>
-                    </div>
-                    <div class="project-card">
-                        <div class="project-icon">🚀</div>
-                        <div class="project-title">query-optimizer</div>
-                        <div class="project-desc">SQL analysis and optimization tool for Trino queries with execution insights.</div>
-                        <div class="project-stats">5M+ queries analyzed</div>
-                        <div class="project-tags">
-                            <span class="tech-tag">trino</span>
-                            <span class="tech-tag">python</span>
-                            <span class="tech-tag">react</span>
-                        </div>
-                    </div>
-                    <div class="project-card">
-                        <div class="project-icon">🌐</div>
-                        <div class="project-title">this-blog</div>
-                        <div class="project-desc">Personal portfolio. Auto-published via Claude AI with image optimization.</div>
-                        <div class="project-stats">Live</div>
-                        <div class="project-tags">
-                            <span class="tech-tag">astro</span>
-                            <span class="tech-tag">typescript</span>
-                            <span class="tech-tag">cloudinary</span>
-                            <span class="tech-tag">vercel</span>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <!-- Gallery -->
-            <section>
-                <div class="section-header">
-                    <span class="section-number">03</span>
-                    <span class="section-title">gallery</span>
-                </div>
-                <div class="gallery-grid">
-                    <div class="gallery-cell gallery-cell-1">
-                        🌌
-                        <div class="gallery-overlay">
-                            <div class="gallery-location">Ladakh</div>
-                            <div class="gallery-date">Jun 2024</div>
-                        </div>
-                    </div>
-                    <div class="gallery-cell gallery-cell-2">
-                        🍃
-                        <div class="gallery-overlay">
-                            <div class="gallery-location">Munnar</div>
-                            <div class="gallery-date">Apr 2024</div>
-                        </div>
-                    </div>
-                    <div class="gallery-cell gallery-cell-3">
-                        🏜️
-                        <div class="gallery-overlay">
-                            <div class="gallery-location">Jaisalmer</div>
-                            <div class="gallery-date">Feb 2024</div>
-                        </div>
-                    </div>
-                    <div class="gallery-cell gallery-cell-4">
-                        🌊
-                        <div class="gallery-overlay">
-                            <div class="gallery-location">Goa</div>
-                            <div class="gallery-date">Dec 2024</div>
-                        </div>
-                    </div>
-                    <div class="gallery-cell gallery-cell-5">
-                        🏔️
-                        <div class="gallery-overlay">
-                            <div class="gallery-location">Manali</div>
-                            <div class="gallery-date">Jan 2025</div>
-                        </div>
-                    </div>
-                    <div class="gallery-cell gallery-cell-6">
-                        🛕
-                        <div class="gallery-overlay">
-                            <div class="gallery-location">Varanasi</div>
-                            <div class="gallery-date">Oct 2023</div>
-                        </div>
-                    </div>
-                    <div class="gallery-cell gallery-cell-7">
-                        🗼
-                        <div class="gallery-overlay">
-                            <div class="gallery-location">Tokyo</div>
-                            <div class="gallery-date">Aug 2023</div>
-                        </div>
-                    </div>
-                    <div class="gallery-cell gallery-cell-8">
-                        🌴
-                        <div class="gallery-overlay">
-                            <div class="gallery-location">Bali</div>
-                            <div class="gallery-date">Jul 2023</div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <!-- Footer -->
-            <footer>
-                <p>© 2025 Laxmikant Patil. Built with neon dreams and data.</p>
-                <p>Say hello → <a href="#">hello@lpatil.dev</a></p>
-            </footer>
-        </main>
-    </div>
-
-    <!-- Travel Post Page -->
-    <div id="page-travel-post" class="page">
-        <main>
-            <div class="post-content">
-                <a class="back-link" onclick="go('home'); return false">← cd ..</a>
-                <h1>3 Days in Manali — Snow, Chai & Solang Valley</h1>
-                <p><em>January 12, 2025</em></p>
-
-                <p>Manali in January is a completely different beast. I've been to Himachal three times before, but this was my first winter trip, and honestly, I wasn't prepared for how magical snow-covered mountains could be when you're sipping hot chai at 7,000 feet.</p>
-
-                <h2>Day 1: Solang Valley Surprise</h2>
-                <p>We arrived late morning after a 15-hour drive from Delhi. The moment we hit the main market, it was clear this wasn't the crowded tourist trap I expected. January = local season, apparently.</p>
-
-                <blockquote>There's something about standing in snow for the first time in a year. Everything slows down. Your breath becomes visible. Time feels different.</blockquote>
-
-                <p>Solang Valley was the highlight—skiing wasn't on the agenda (prices were ridiculous), but walking through fresh powder with mountain peaks disappearing into clouds was surreal enough. The air was crisp, almost sharp in your lungs.</p>
-
-                <h2>Day 2: Lost in Locals</h2>
-                <p>We skipped the tourist circuit and just walked. Old Town Manali, tiny cafes, chai stalls with uncles debating politics, shops selling Himachali wool. Found this incredible restaurant run by a 60-year-old woman who's been making momos for 30 years.</p>
-
-                <p>She told us stories about Manali in the 80s when it was just a village. Now it's crawling with startups and digital nomads in peak season. But in January? It's back to being a real place.</p>
-
-                <h2>Day 3: Rohtang & Reflections</h2>
-                <p>Drove up to Rohtang Pass early morning. The road was treacherous—snow, ice, tight turns—but the view was worth every moment of clutching the car handle.</p>
-
-                <p>Looking down at three valleys simultaneously, I realized why people come to mountains to think. There's something about scale that puts everything in perspective. Your problems look smaller up there.</p>
-
-                <p style="margin-top: 2rem; color: var(--text-muted); font-size: 0.9rem;">Filed under <strong>travel</strong> · 3,200 words · 12 min read</p>
-            </div>
-        </main>
-    </div>
-
-    <!-- Tech Post Page -->
-    <div id="page-tech-post" class="page">
-        <main>
-            <div class="post-content">
-                <a class="back-link" onclick="go('home'); return false">← cd ..</a>
-                <h1>Building Real-Time Pipelines with Kafka + Flink</h1>
-                <p><em>January 8, 2025</em></p>
-
-                <p>Real-time data pipelines are the new normal. If you're still batch-processing everything daily, you're essentially driving a sports car in first gear. Let's talk about why Kafka + Flink is the combo changing the game.</p>
-
-                <h2>The Architecture</h2>
-                <p>Here's what we built at scale (100K events/sec):</p>
-
-                <div class="code-block">
-<span class="comment">// Producer: Events stream into Kafka</span>
-<span class="kw">const</span> producer = <span class="func">KafkaProducer</span>({
-  brokers: [<span class="str">'kafka-1:9092'</span>, <span class="str">'kafka-2:9092'</span>],
-  topic: <span class="str">'events.raw'</span>,
-  compression: <span class="str">'snappy'</span>
-})
-
-<span class="comment">// Stream in, events out—no buffering</span>
-producer.<span class="func">send</span>(event)
-                </div>
-
-                <p>Kafka acts as the buffer. Flink processes. ClickHouse stores. This separation of concerns is crucial—if your pipeline hiccups, you don't lose data.</p>
-
-                <h2>The Flink Job</h2>
-                <p>Here's where the magic happens. Flink's windowing and state management make real-time aggregations trivial:</p>
-
-                <div class="code-block">
-<span class="type">DataStream</span>&lt;Event&gt; events = env
-  .<span class="func">addSource</span>(<span class="type">FlinkKafkaConsumer</span>)
-  .<span class="func">assignTimestampsAndWatermarks</span>(WatermarkStrategy)
-
-events
-  .<span class="func">keyBy</span>(<span class="str">"user_id"</span>)
-  .<span class="func">window</span>(<span class="func">TumblingEventTimeWindow</span>(<span class="type">Time</span>.<span class="func">minutes</span>(<span class="str">5</span>)))
-  .<span class="func">aggregate</span>(<span class="type">AggregationFunction</span>)
-  .<span class="func">addSink</span>(<span class="type">ClickHouseSink</span>)
-                </div>
-
-                <p>This processes events in 5-minute windows, aggregates by user, and pushes results to ClickHouse. Sub-second latency, fault-tolerant, exactly-once semantics.</p>
-
-                <h2>Why This Stack?</h2>
-                <ul style="margin: 1.5rem 0; padding-left: 2rem;">
-                    <li style="margin-bottom: 0.8rem;"><strong>Kafka:</strong> Distributed, durable, ridiculously reliable. Built for throughput.</li>
-                    <li style="margin-bottom: 0.8rem;"><strong>Flink:</strong> True streaming (not micro-batches). Event-time semantics. Complex state.</li>
-                    <li style="margin-bottom: 0.8rem;"><strong>ClickHouse:</strong> OLAP database designed for time-series. Sub-second queries on billions of rows.</li>
-                </ul>
-
-                <h2>The Gotchas</h2>
-                <blockquote>State management in Flink is tricky. Get your RocksDB configs wrong, and your job will mysteriously OOM during high load.</blockquote>
-
-                <p>Things we learned the hard way:</p>
-                <ul style="margin: 1.5rem 0; padding-left: 2rem;">
-                    <li style="margin-bottom: 0.8rem;">Watermarks need careful tuning—too aggressive and you lose events, too lenient and you have latency</li>
-                    <li style="margin-bottom: 0.8rem;">Exactly-once semantics come with overhead. Sometimes at-least-once is the right trade-off</li>
-                    <li style="margin-bottom: 0.8rem;">Monitoring is non-negotiable. Flink's UI is great but instrument everything</li>
-                </ul>
-
-                <h2>Closing Thoughts</h2>
-                <p>Building a real-time pipeline is like conducting an orchestra. Every component needs to be in sync. But when it works? You get live insights at scale. That's worth the complexity.</p>
-
-                <p style="margin-top: 2rem; color: var(--text-muted); font-size: 0.9rem;">Filed under <strong>tech</strong> · 2,100 words · 8 min read</p>
-            </div>
-        </main>
-    </div>
-
-    <script>
-        function go(page) {
-            // Hide all pages
-            document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-            
-            // Show target page
-            const pageMap = {
-                'home': 'page-home',
-                'travel-post': 'page-travel-post',
-                'tech-post': 'page-tech-post'
-            };
-            
-            const targetPage = document.getElementById(pageMap[page] || 'page-home');
-            if (targetPage) {
-                targetPage.classList.add('active');
-            }
-            
-            // Scroll to top
-            window.scrollTo(0, 0);
-        }
-    </script>
 </body>
 </html>
