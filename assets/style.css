@@ -389,6 +389,27 @@ main.term {
     line-height: 1.55;
 }
 
+/* ============ COMING SOON (section stubs) ============ */
+.coming-soon {
+    display: inline-block;
+    overflow: hidden;
+    white-space: nowrap;
+    color: var(--fg-muted);
+    font-style: italic;
+    vertical-align: bottom;
+    animation: type-cycle 5s steps(14) infinite alternate;
+    width: 14ch;
+}
+
+@keyframes type-cycle {
+    from { width: 0; }
+    to   { width: 14ch; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .coming-soon { animation: none; width: auto; }
+}
+
 /* ============ FOOTER ============ */
 footer.bottombar {
     max-width: 820px;
