@@ -26,23 +26,54 @@
 
     <main class="term">
         <div class="stagger">
+
             <div class="line">
                 <span class="prompt">$</span>
-                <span class="cmd">cd <span class="str">~/photography/</span></span>
+                <span class="cmd">ls <span class="str">~/photography/</span></span>
             </div>
-            <div class="line">
-                <span class="prompt">$</span>
-                <span class="cmd">ls</span>
+
+            <div class="out">
+                <div class="gallery" id="gallery">
+
+                    <figure>
+                        <a href="#" data-src="../pictures/photography/fall-colors-at-white-mountians.jpg"
+                                    data-title="fall colors"
+                                    data-where="White Mountains, NH">
+                            <img src="../pictures/photography/fall-colors-at-white-mountians.jpg"
+                                 alt="Towering maples in peak autumn colors with blue sky overhead">
+                        </a>
+                        <figcaption>
+                            <span class="title">fall colors</span>
+                            <span class="where">White Mountains, NH</span>
+                        </figcaption>
+                    </figure>
+
+                    <figure>
+                        <a href="#" data-src="../pictures/photography/golden-gate-bridge-sf.jpg"
+                                    data-title="golden gate bridge"
+                                    data-where="San Francisco, CA">
+                            <img src="../pictures/photography/golden-gate-bridge-sf.jpg"
+                                 alt="The Golden Gate Bridge">
+                        </a>
+                        <figcaption>
+                            <span class="title">golden gate bridge</span>
+                            <span class="where">San Francisco, CA</span>
+                        </figcaption>
+                    </figure>
+
+                </div>
             </div>
-            <p class="out"><span class="coming-soon">coming soon...</span></p>
+
             <div class="line">
                 <span class="prompt">$</span>
                 <a href="../index.html" class="back">cd ~</a>
             </div>
+
             <div class="line">
                 <span class="prompt">$</span>
                 <span class="cursor" aria-hidden="true"></span>
             </div>
+
         </div>
     </main>
 
@@ -50,6 +81,54 @@
         <span>© 2026</span>
         <span>lpatil.dev</span>
     </footer>
+
+    <div class="lightbox" id="lightbox" aria-hidden="true">
+        <span class="lightbox-close">esc to close</span>
+        <img id="lightbox-img" src="" alt="">
+        <div class="lightbox-meta">
+            <span class="title" id="lightbox-title"></span>
+            <span id="lightbox-where"></span>
+        </div>
+    </div>
+
+    <script>
+        (function () {
+            const lb    = document.getElementById('lightbox');
+            const img   = document.getElementById('lightbox-img');
+            const ltit  = document.getElementById('lightbox-title');
+            const lwhr  = document.getElementById('lightbox-where');
+            const gal   = document.getElementById('gallery');
+            if (!lb || !img || !gal) return;
+
+            function open(src, title, where) {
+                img.src = src;
+                ltit.textContent = title || '';
+                lwhr.textContent = where || '';
+                lb.classList.add('open');
+                lb.setAttribute('aria-hidden', 'false');
+            }
+            function close() {
+                lb.classList.remove('open');
+                lb.setAttribute('aria-hidden', 'true');
+                img.src = '';
+            }
+
+            gal.addEventListener('click', (e) => {
+                const a = e.target.closest('a[data-src]');
+                if (!a) return;
+                e.preventDefault();
+                open(a.dataset.src, a.dataset.title, a.dataset.where);
+            });
+
+            lb.addEventListener('click', (e) => {
+                if (e.target !== img) close();
+            });
+
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape' && lb.classList.contains('open')) close();
+            });
+        })();
+    </script>
 
 </body>
 </html>
